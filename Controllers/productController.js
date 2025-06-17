@@ -1,6 +1,6 @@
 const Product = require("../models/Product");
 const { isValidObjectId } = require("mongoose");
-
+const ejs = require('ejs');
 const addProduct =async (req,res) => { 
  
         const { title,description } = req.body || {};
@@ -26,8 +26,12 @@ const addProduct =async (req,res) => {
         })
 }; 
 const getAllProducts = async(req,res)=>{
-    const Products = await Product.find();
-    res.json(Products);
+    const username ="mahmoud";
+    res.render('product',{
+        username:username
+    });
+    // const Products = await Product.find();
+    //  res.send("Products route accessed")
 }
 const getProductById = async(req,res)=>{
     const id = req.params.id;
