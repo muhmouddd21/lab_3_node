@@ -6,6 +6,7 @@ const mongoUri = process.env.MONGO_URI;
 console.log('Using MONGO_URI:', mongoUri);
 const express = require('express');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const app = express();
 app.set('view engine', 'ejs');
 app.use(express.json());
@@ -26,16 +27,25 @@ const userRoutes = require ("./Routers/userRouter");
 app.use("/posts", postRoutes);
 
 app.use("/products", productRoutes);
-
+app.use("/user",userRoutes)
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-    console.error('Error occurred:', err);
-    res.status(500).json({
-        message: "Internal server error",
-        error: process.env.NODE_ENV === 'development' ? err.message : 'Something went wrong'
+
+    if (process.env.NODE_ENV === 'development') {
+        console.error('🔥 Error Stack:', err.stack);
+    } else {
+        console.error('🔥 Error:', err.message);
+    }
+
+
+    res.status(err.status || 500).json({
+        success: false,
+        message: err.message || 'Internal Server Error',
+        ...(process.env.NODE_ENV === 'development' && { stack: err.stack }),
     });
 });
+
 
 
 app.listen(port, () => {
