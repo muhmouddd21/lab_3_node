@@ -6,7 +6,7 @@ const mongoUri = process.env.MONGO_URI;
 console.log('Using MONGO_URI:', mongoUri);
 const express = require('express');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+
 const app = express();
 app.set('view engine', 'ejs');
 app.use(express.json());

@@ -11,21 +11,22 @@ const userSchema = new schema({
         type:String,
         required: true,
         minlength: 3,
-        maxlength: 20,
+        maxlength: 100,
 
     },
     password:{
         type:String,
         required:true,
         minlength: 3,
-        maxlength: 20,
+        maxlength: 100,
     },
-    confirmPassword :{
+    role:{
         type:String,
         required:true,
-        minlength: 3,
-        maxlength: 20,
+        role:String
     }
 
 })
 userSchema.index({email:1},{unique:true});
+const User = mongoose.model("User",userSchema);
+module.exports = User;
