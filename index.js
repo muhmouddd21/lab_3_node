@@ -1,6 +1,7 @@
 require('dotenv').config();
 let ejs = require('ejs');
 const Authenticate = require("./middlewares/Authenticate")
+
 const port = process.env.PORT || 3000;
 const mongoUri = process.env.MONGO_URI;
 

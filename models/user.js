@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const util = require("util");
@@ -31,6 +32,13 @@ const userSchema = new schema({
     role:{
         type:String,
         required:true,
+    }
+
+},{
+    toJSON: {
+        transform:(doc,ret)=>{
+            return _.omit(ret,['__v','password']);
+        }
     }
 
 })
@@ -67,9 +75,9 @@ userSchema.statics.verifyUser = async function(token){
         const {id } = await jwtVerify(token,process.env.JWT_SECRET);
         return await User.findById(id);
     }catch(err){
-        const Error = new Error("You are not Authorized");
-        Error.status = 401; 
-        throw Error;
+        const Errr = new Error("You are not Authorized");
+        Errr.status = 401; 
+        throw Errr;
     }
 
 }

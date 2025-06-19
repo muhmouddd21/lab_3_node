@@ -5,7 +5,7 @@ const User = require('./../models/user');
         const user = await User.verifyUser(token)
         if(user){
             req.user =user;
-            return next();
+             res.send(req.user);
         }else{
             const error = new Error("You are not Authorized");
             error.status = 401; 
