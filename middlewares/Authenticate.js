@@ -1,0 +1,18 @@
+const User = require('./../models/user');
+
+ const Authenticate =async (req,res,next)=> {
+        const token = req.headers.authorization;
+        const user = await User.verifyUser(token)
+        if(user){
+            req.user =user;
+            return next();
+        }else{
+            const error = new Error("You are not Authorized");
+            error.status = 401; 
+            return next(error);
+            
+        }
+
+}
+
+module.exports = Authenticate;
