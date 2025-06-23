@@ -1,5 +1,7 @@
 const Post = require("../models/Post");
 const { isValidObjectId } = require("mongoose");
+const Logger = require('../services/logger.service');
+const logger = new Logger('post.controller');
 const addPost =async (req,res) => { 
  
         const { title,description } = req.body || {};
@@ -26,6 +28,8 @@ const addPost =async (req,res) => {
 }; 
 const getAllPosts = async(req,res)=>{
     const Posts = await Post.find();
+    logger.error("dsdasdsada",Posts[0])
+    // logger.info("return all posts ",Posts[0]);
     res.json(Posts);
 }
 const getPostById = async(req,res)=>{
