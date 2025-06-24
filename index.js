@@ -37,7 +37,8 @@ app.get("/profile",Authenticate);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-
+    console.log(process.env.NODE_ENV);
+    
     if (process.env.NODE_ENV === 'development') {
         console.error('🔥 Error Stack:', err.stack);
     } else {

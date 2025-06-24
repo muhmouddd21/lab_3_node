@@ -28,7 +28,7 @@ const addPost =async (req,res) => {
 }; 
 const getAllPosts = async(req,res)=>{
     const Posts = await Post.find();
-    logger.error("dsdasdsada",Posts[0])
+    // logger.error("dsdasdsada",Posts[0])
     // logger.info("return all posts ",Posts[0]);
     res.json(Posts);
 }
